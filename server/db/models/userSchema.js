@@ -5,7 +5,45 @@ const jwt = require('jsonwebtoken');
 const secretKey = process.env.KEY;
 
 const userSchema = new mongoose.Schema({
-  
+  fname: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Invalid email address");
+      }
+    },
+  },
+  mobile: {
+    type: Number,
+    required: true,
+    unique: true,
+    maxlength: 10,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+  },
+  cpassword: {
+    type: String,
+    required: true,
+    minlength: 6,
+  },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ]
 });
 
 userSchema.pre("save", async function(next){
@@ -32,7 +70,6 @@ userSchema.methods.generateAuthToken = async function(){
     console.log("Error while generating token",error);
   }
 }
-
 
 const User = new mongoose.model("User", userSchema);
 

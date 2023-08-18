@@ -16,8 +16,6 @@ app.get("/", function (req, res) {
   res.send("Hello World");
 });
 
-app.listen(5000, (req, res) => {
+app.listen(8000, (req, res) => {
   console.log("Server Started");
 });
-
-DefaultData();

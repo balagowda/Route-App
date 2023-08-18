@@ -1,24 +1,8 @@
 const express = require("express");
 const router = new express.Router();
-const Products = require("../db/models/productSchema");
 const User = require("../db/models/userSchema");
 const bcrypt = require("bcryptjs");
 const Authenticate = require('../Auth/Authenticate');
-
-
-
-//get individual product data
-
-router.get("/getproducts/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const individualData = await Products.findOne({ id: id });
-    res.status(201).json(individualData);
-  } catch (error) {
-    res.status(422).json(individualData);
-    console.log(error.message);
-  }
-});
 
 // user register data
 router.post("/register", async (req, res) => {
@@ -72,11 +56,10 @@ router.post("/login", async (req, res) => {
         res.status(422).json({error:"Invalid details"});
       }
       else{
-
         //token generate function
         const token = await userLogin.generateAuthToken();
 
-        res.cookie("", token, {
+        res.cookie("routeProject", token, {
           expires: new Date(Date.now() + 2589000),
           httpOnly: true
       });

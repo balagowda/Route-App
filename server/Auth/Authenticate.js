@@ -5,7 +5,7 @@ const secrateKey = process.env.KEY;
 const Authenticate = async(req,res,next)=>{
     try {
 
-        const token = req.cookies.cloneProject;
+        const token = req.cookies.routeProject;
        
         const verify = jwt.verify(token,secrateKey);
         
