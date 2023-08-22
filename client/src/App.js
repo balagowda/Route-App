@@ -3,8 +3,8 @@ import "./App.css";
 import Home from "./components/HomePage/Home";
 import About from "./components/HomePage/About";
 import Contact from "./components/HomePage/Contact";
-import { SignIn } from "./components/Auth/SignIn";
-import { SignUp } from "./components/Auth/SignUp";
+import SignIn  from "./components/Auth/SignIn";
+import SignUp  from "./components/Auth/SignUp";
 
 function App() {
   return (

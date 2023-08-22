@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Avatar from "@mui/material/Avatar";
-import { blue, green } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -40,6 +40,7 @@ const NavBar = () => {
               aria-controls={open ? "basic-menu" : undefined}
               aria-expanded={open ? "true" : undefined}
               id="basic-button"
+              style={{cursor:"pointer"}}
             >
               BP
             </Avatar>
