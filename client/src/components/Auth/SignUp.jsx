@@ -5,15 +5,71 @@ import { Form, Button } from "react-bootstrap";
 import "./auth.css";
 import NavBar from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const [data, setData] = useState({
+    name:"",
+    email: "",
+    password: "",
+    confirmPassword:"",
+  });
+
+  console.log(data);
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+
+    setData((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
+
+    const { fname, email, mobile, password, cpassword } = data;
+
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fname,
+        email,
+        mobile,
+        password,
+        cpassword,
+      }),
+    });
+
+    const reply = await res.json();
+    // console.log(reply);
+
+    if (res.status === 422 || !data) {
+      toast.warn(reply.error, {
+        position: "top-center",
+        });
+    
+    } else {
+      toast.success('Registered Sucessfully', {
+        position: "top-center",
+        });
+      setData({
+        ...data,
+        fname: "",
+        email: "",
+        mobile: "",
+        password: "",
+        cpassword: "",
+      });
+    }
   };
 
   return (
@@ -28,8 +84,9 @@ const SignUp = () => {
             <Form.Control
               type="text"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={data.name}
+              onChange={handleInput}
+              name="name"
             />
           </Form.Group>{" "}
           <br />
@@ -38,8 +95,9 @@ const SignUp = () => {
             <Form.Control
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={data.email}
+              onChange={handleInput}
+              name="email"
             />
           </Form.Group>{" "}
           <br />
@@ -48,8 +106,9 @@ const SignUp = () => {
             <Form.Control
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={data.password}
+              onChange={handleInput}
+              name="password"
             />
           </Form.Group>{" "}
           <br />
@@ -58,8 +117,9 @@ const SignUp = () => {
             <Form.Control
               type="password"
               placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={data.confirmPassword}
+              onChange={handleInput}
+              name="confirmPassword"
             />
           </Form.Group>{" "}
           <br />
@@ -71,6 +131,7 @@ const SignUp = () => {
             Have an account? <Link to="/signin">Login</Link>
           </p>
         </Form>
+        <ToastContainer/>
       </div>
     </>
   );

@@ -1,18 +1,66 @@
-// Login.js
+//Sign.js
 
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import NavBar from "../NavBar/NavBar";
 import "./auth.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+console.log(data);
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+
+    setData((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      };
+    });
+  };
+
+  const redirect = useNavigate("");
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle login logic here
+
+    const { email, password } = data;
+
+    const res = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const reply = await res.json();
+
+    if (res.status === 422 || !data) {
+      toast.warn(reply.error, {
+        position: "top-center",
+      });
+    } else {
+      redirect("/");
+      toast.success("Login Sucess", {
+        position: "top-center",
+      });
+      setData({
+        ...data,
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
@@ -27,8 +75,9 @@ const SignIn = () => {
             <Form.Control
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={data.email}
+              onChange={handleInput}
+              name="email"
             />
           </Form.Group>{" "}
           <br />
@@ -37,8 +86,9 @@ const SignIn = () => {
             <Form.Control
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={data.password}
+              onChange={handleInput}
+              name="password"
             />
           </Form.Group>{" "}
           <br />
@@ -50,6 +100,7 @@ const SignIn = () => {
             Don't have an account? <Link to="/signup">SignUp</Link>
           </p>
         </Form>
+        <ToastContainer/>
       </div>
     </>
   );
