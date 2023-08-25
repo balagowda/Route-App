@@ -13,7 +13,7 @@ const SignIn = () => {
     password: "",
   });
 
-console.log(data);
+// console.log(data);
 
   const handleInput = (e) => {
     const { name, value } = e.target;

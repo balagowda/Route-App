@@ -11,13 +11,11 @@ import { ToastContainer, toast } from 'react-toastify';
 const SignUp = () => {
 
   const [data, setData] = useState({
-    name:"",
+    fname:"",
     email: "",
     password: "",
-    confirmPassword:"",
+    cpassword:"",
   });
-
-  console.log(data);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -33,7 +31,8 @@ const SignUp = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    const { fname, email, mobile, password, cpassword } = data;
+    const { fname, email, password, cpassword } = data;
+    // console.log(data);
 
     const res = await fetch("/register", {
       method: "POST",
@@ -43,7 +42,6 @@ const SignUp = () => {
       body: JSON.stringify({
         fname,
         email,
-        mobile,
         password,
         cpassword,
       }),
@@ -65,7 +63,6 @@ const SignUp = () => {
         ...data,
         fname: "",
         email: "",
-        mobile: "",
         password: "",
         cpassword: "",
       });
@@ -84,9 +81,9 @@ const SignUp = () => {
             <Form.Control
               type="text"
               placeholder="Name"
-              value={data.name}
+              value={data.fname}
               onChange={handleInput}
-              name="name"
+              name="fname"
             />
           </Form.Group>{" "}
           <br />
@@ -117,9 +114,9 @@ const SignUp = () => {
             <Form.Control
               type="password"
               placeholder="Confirm Password"
-              value={data.confirmPassword}
+              value={data.cpassword}
               onChange={handleInput}
-              name="confirmPassword"
+              name="cpassword"
             />
           </Form.Group>{" "}
           <br />

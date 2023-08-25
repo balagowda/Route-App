@@ -6,9 +6,9 @@ const Authenticate = require('../Auth/Authenticate');
 
 // user register data
 router.post("/register", async (req, res) => {
-  const { fname, email, mobile, password, cpassword } = req.body;
+  const { fname, email, password, cpassword } = req.body;
 
-  if (!fname || !email || !mobile || !password || !cpassword) {
+  if (!fname || !email || !password || !cpassword) {
     res.status(422).json({ error: "Fill all the feild" });
   }
 
@@ -23,7 +23,6 @@ router.post("/register", async (req, res) => {
       const createUser = new User({
         fname,
         email,
-        mobile,
         password,
         cpassword,
       });
