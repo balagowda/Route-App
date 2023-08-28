@@ -1,11 +1,12 @@
 //Sign.js
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import NavBar from "../NavBar/NavBar";
 import "./auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { LoginContext } from "../context/context";
 
 const SignIn = () => {
   const [data, setData] = useState({
@@ -14,6 +15,7 @@ const SignIn = () => {
   });
 
 // console.log(data);
+const { account, setAccount } = useContext(LoginContext);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -52,6 +54,7 @@ const SignIn = () => {
       });
     } else {
       redirect("/");
+      // setAccount(reply);
       toast.success("Login Sucess", {
         position: "top-center",
       });

@@ -81,9 +81,9 @@ router.post("/login", async (req, res) => {
 router.get('/userdata',Authenticate,async(req,res)=>{
   try {
 
-    const buyUser = await User.findOne({_id:req.userID});
+    const getUser = await User.findOne({_id:req.userID});
     // console.log(buyUser);
-    res.status(201).json(buyUser);
+    res.status(201).json(getUser);
     
   } catch (error) {
     console.log(error.message);
@@ -98,7 +98,7 @@ router.get('/logout',Authenticate,(req,res)=>{
         return cruval.token !== req.token
     });
 
-    res.clearCookie("cloneProject", { path: "/" });
+    res.clearCookie("routeProject", { path: "/" });
     req.rootUser.save();
     res.status(201).json(req.rootUser.tokens);
     console.log("user logout");
