@@ -5,6 +5,7 @@ import About from "./components/HomePage/About";
 import Contact from "./components/HomePage/Contact";
 import SignIn  from "./components/Auth/SignIn";
 import SignUp  from "./components/Auth/SignUp";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/contact" element={<Contact />}></Route>
         <Route exact path="/signin" element={<SignIn />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
+        <Route exact path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </>
   );

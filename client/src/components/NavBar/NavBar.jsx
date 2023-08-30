@@ -1,9 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Avatar from "@mui/material/Avatar";
-import { blue } from "@mui/material/colors";
+import { purple } from "@mui/material/colors";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 
 const NavBar = () => {
   const { account, setAccount } = useContext(LoginContext);
+  // console.log(account);
 
   const [anchorEl, setAnchorEl] = useState(false);
 
@@ -29,7 +30,7 @@ const NavBar = () => {
   };
 
    //user data fetching
-   const getuserData = useCallback(async () => {
+   const getuserData = async () => {
     const res = await fetch("/userdata", {
       method: "GET",
       headers: {
@@ -45,8 +46,7 @@ const NavBar = () => {
       console.log("Error in fetching user data");
     } else {
       setAccount(reply);
-    }
-  },[setAccount]);
+    }};
 
   //logout user
   const logoutUser = async () => {
@@ -67,17 +67,17 @@ const NavBar = () => {
       throw error;
     } else {
       setAccount(null);
-      reDirect("/");
       toast.success("Logout Successfull", {
         position: "top-center",
       });
+      reDirect("/");
     }
   };
 
   //useeffect call
   useEffect(() => {
     getuserData();
-  }, [account,getuserData]);
+  }, []);
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
@@ -89,14 +89,15 @@ const NavBar = () => {
           <div>
             {account ?  (
               <Avatar
-                sx={{ bgcolor: blue }}
+                sx={{ bgcolor: purple[900] }}
                 onClick={handleClick}
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
                 id="basic-button"
                 style={{ cursor: "pointer" }}
+                title={account.fname}
               >
-                BP
+                {account.fname[0].toUpperCase()}
               </Avatar>
             ):(
               <Avatar />

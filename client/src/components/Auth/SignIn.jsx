@@ -1,6 +1,6 @@
 //Sign.js
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import NavBar from "../NavBar/NavBar";
 import "./auth.css";
@@ -53,8 +53,7 @@ const { account, setAccount } = useContext(LoginContext);
         position: "top-center",
       });
     } else {
-      redirect("/");
-      // setAccount(reply);
+      redirect("/dashboard");
       toast.success("Login Sucess", {
         position: "top-center",
       });
@@ -65,6 +64,12 @@ const { account, setAccount } = useContext(LoginContext);
       });
     }
   };
+
+  useEffect(() => {
+    if (account) {
+      redirect("/dashboard"); 
+    }
+  }, [account,redirect]);
 
   return (
     <>
