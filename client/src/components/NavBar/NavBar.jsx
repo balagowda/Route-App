@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Avatar from "@mui/material/Avatar";
-import { purple } from "@mui/material/colors";
+import { green, purple } from "@mui/material/colors";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -11,6 +11,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoginContext } from "../context/context";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import '../styling/nav.css';
 
 const NavBar = () => {
   const { account, setAccount } = useContext(LoginContext);
@@ -80,16 +81,16 @@ const NavBar = () => {
   }, []);
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar className="nav-bar-main" data-bs-theme="dark" bg="dark">
       <Container>
-        <Navbar.Brand href="/">MyRouter</Navbar.Brand>
+        <Navbar.Brand href="/" className="brand">MyRouter</Navbar.Brand>
         <Nav className="ms-auto">
           <Nav.Link href="/about">About</Nav.Link>
           <Nav.Link href="/contact">Contact</Nav.Link>&nbsp;&nbsp;
           <div>
             {account ?  (
               <Avatar
-                sx={{ bgcolor: purple[900] }}
+                sx={{ bgcolor: green[600] }}
                 onClick={handleClick}
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
@@ -100,7 +101,7 @@ const NavBar = () => {
                 {account.fname[0].toUpperCase()}
               </Avatar>
             ):(
-              <Avatar />
+              <Avatar sx={{ bgcolor: green[600] }}/>
             ) }
             <Menu
               id="basic-menu"

@@ -1,0 +1,13 @@
+.nav-bar-main {
+  /* border-bottom: 1px solid rgba(223, 223, 223, 0.425); */
+  color: aliceblue;
+  background: #141c39;
+}
+
+.brand {
+  background: #cf131f;
+  background: linear-gradient(to right, #cf131f 34%, #15cf00 48%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
