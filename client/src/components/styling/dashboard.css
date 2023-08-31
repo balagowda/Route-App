@@ -1,0 +1,19 @@
+.row>.link{
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+}
+
+.row>.link:hover{
+    background-color: #27b095d9;
+    color: white;
+    border-radius: 8px;
+    opacity: .89;
+}
+
+#sidebar a.active {
+    background-color: #27b095d9;
+    color: white;
+    border-left: rgb(14, 138, 160) 6px inset;
+    border-radius: 0 8px 8px 0;
+  }

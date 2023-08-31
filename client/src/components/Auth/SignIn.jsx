@@ -54,7 +54,7 @@ const { account, setAccount } = useContext(LoginContext);
         position: "top-center",
       });
     } else {
-      redirect("/dashboard");
+      redirect("/dashboard/map");
       toast.success("Login Sucess", {
         position: "top-center",
       });
@@ -68,7 +68,7 @@ const { account, setAccount } = useContext(LoginContext);
 
   useEffect(() => {
     if (account) {
-      redirect("/dashboard"); 
+      redirect("/dashboard/map"); 
     }
   }, [account,redirect]);
 
