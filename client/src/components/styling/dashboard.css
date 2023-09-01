@@ -88,3 +88,14 @@
   padding: 3px;
   cursor: pointer;
 }
+
+.way-point{
+    margin: 3px;
+    border: 2px solid rgb(199, 199, 199);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.way-address{
+  width: 90%;
+}
