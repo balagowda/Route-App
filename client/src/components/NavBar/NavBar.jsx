@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Avatar from "@mui/material/Avatar";
-import { green, purple } from "@mui/material/colors";
+import { green} from "@mui/material/colors";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -48,6 +48,12 @@ const NavBar = () => {
     } else {
       setAccount(reply);
     }};
+
+  //user profile
+  const userProfile=()=>{
+    handleClose();
+    reDirect('/dashboard/profile');
+  }
 
   //logout user
   const logoutUser = async () => {
@@ -112,7 +118,7 @@ const NavBar = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose} >
+              <MenuItem onClick={userProfile} >
                 {" "}
                 <AccountCircleIcon style={{ fontSize: 20 }} />
                 &nbsp; Profile

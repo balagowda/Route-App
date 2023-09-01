@@ -5,7 +5,6 @@ import "../styling/home.css";
 import Leftbar from "./Leftbar";
 import Profile from "./Profile";
 import Map from "./Map";
-import Rightbar from "./Rightbar";
 import { LoginContext } from "../context/context";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +19,7 @@ const Dashboard = () => {
       reDirect("/signin"); 
     }
   }, [account,reDirect]);
+  
   return (
     <>
       <NavBar />
@@ -32,13 +32,14 @@ const Dashboard = () => {
             <Route
               exact
               path="/profile"
-              element={<Rightbar child={<Profile />} />}
+              element={<Profile />}
             />
             <Route
               exact
               path="/map"
-              element={<Rightbar child={<Map />} />}
+              element={<Map />}
             />
+            <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
       </div>

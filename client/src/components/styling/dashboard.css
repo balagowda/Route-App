@@ -1,19 +1,90 @@
-.row>.link{
-    text-decoration: none;
-    font-size: 18px;
-    color: black;
+.row > .link {
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
 }
 
-.row>.link:hover{
-    background-color: #27b095d9;
-    color: white;
-    border-radius: 8px;
-    opacity: .89;
+.row > .link:hover {
+  background-color: #27b095d9;
+  color: white;
+  border-radius: 8px;
+  opacity: 0.89;
 }
 
 #sidebar a.active {
-    background-color: #27b095d9;
-    color: white;
-    border-left: rgb(14, 138, 160) 6px inset;
-    border-radius: 0 8px 8px 0;
+  background-color: #27b095d9;
+  color: white;
+  border-left: rgb(14, 138, 160) 6px inset;
+  border-radius: 0 8px 8px 0;
+}
+
+.profile-container {
+  /* background-color: aqua; */
+}
+
+.profile-pic {
+  font-size: 20px;
+}
+
+.header {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  padding: 3px;
+  /* border-bottom: 2px solid rgb(199, 199, 199); */
+}
+
+.header h3 {
+  margin: 0;
+  padding: 10px;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  animation: borderExpand 2s ease-out;
+  transform-origin: 0% 50%;
+  animation-fill-mode: forwards;
+}
+
+@keyframes borderExpand {
+  0% {
+    width: 0;
+    background-color: #121fcf;
   }
+  50% {
+    width: 50%;
+    background-color: #cf1512;
+  }
+  100% {
+    width: 100%;
+    background-color: #c7c7c7;
+  }
+}
+
+.form-container .header > h3 {
+  background: #121fcf;
+  background: linear-gradient(to right, #121fcf 15%, #cf1512 38%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 3px;
+}
+
+.form-container .form {
+  padding: 3px;
+  box-sizing: border-box;
+  width: 80%;
+}
+
+.add-item {
+  border: 1px solid red;
+  width: 20%;
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
+}
