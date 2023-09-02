@@ -8,8 +8,8 @@ const Leftbar = () => {
       <NavLink className="p-2 link" to="/dashboard/profile">
         Profile
       </NavLink>
-      <NavLink className="p-2 link" to="/dashboard/map">
-        Map
+      <NavLink className="p-2 link" to="/dashboard/roots">
+        Route
       </NavLink>
     </div>
   );

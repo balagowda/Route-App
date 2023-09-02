@@ -1,109 +1,62 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
 import "../styling/dashboard.css";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
-import WayPoint from "./WayPoint";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+import Skeleton from "@mui/material/Skeleton";
+import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 
-const Map = () => {
-  const [data, setData] = useState({ startAddress: "", endAddress: "" });
-  const [visible, setVisible] = useState(false);
-  const [wayAddress, setWayAddress] = useState("");
+const center = {
+  lat: 13.171860787743926,
+  lng: 77.5363320609042,
+};
 
-  console.log(wayAddress);
+const Map = ({ directionsResponse }) => {
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleClick = () => {
-    setVisible(!visible);
-  };
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
+    libraries: ["places"],
+  });
 
   return (
-    <div className="p-3">
-      <div className="form-container">
-        <div className="header">
-          <h3>We assist you in choosing the best route </h3>
-        </div>
-        <div className="form mx-5 my-3">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formName">
-              <Form.Label>Start Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="eg, Mysuru"
-                name="startAddress"
-                value={data.startAddress}
-                onChange={handleChange}
-              />
-            </Form.Group>{" "}
-
-            {wayAddress.length ? (
-              <>
-                {wayAddress.map((address, i) => {
-                  return (
-                    <div className="way-address" key={i}>
-                      <br />
-                      <Form.Group controlId="formName">
-                        <Form.Label>Way Point Address {i+1}</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="wayAddress"
-                          value={address}
-                          readOnly
-                        />
-                      </Form.Group>
-                    </div>
-                  );
-                })}
-              </>
-            ) : (
-              ""
+    <div className="routing-area bg-dark">
+      {isLoaded ? (
+        <>
+          <GoogleMap
+            center={center}
+            zoom={15}
+            mapContainerStyle={{ width: "100%", height: "100%" }}
+            onLoad={(map) => setMap(map)}
+          >
+            <Marker position={center} />
+            {directionsResponse && (
+              <DirectionsRenderer directions={directionsResponse} />
             )}
-
-            <br />
-            <Form.Group controlId="formName">
-              <Form.Label>Destination Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="eg, Bengaluru"
-                name="endAddress"
-                value={data.endAddress}
-                onChange={handleChange}
-              />
-            </Form.Group>{" "}
-            <br />
-
-            {visible ? (
-              <WayPoint
-                click={handleClick}
-                wayAddress={wayAddress}
-                setWayAddress={setWayAddress}
-              />
-            ) : (
-              <div className="add-item" onClick={handleClick}>
-                <AddCircleOutlinedIcon style={{ color: "red" }} />
-                &nbsp; Add Way Point
-              </div>
-            )}
-
-            <br />
-            <Button variant="primary" type="submit" className="col-sm-3">
-              Find Route
-            </Button>
-          </Form>
-        </div>
-      </div>
-      <div className="map-container"></div>
+          </GoogleMap>
+          <div onClick={() => map.panTo(center)} className="geo-pointer">
+            <GpsFixedIcon
+              style={{
+                color: "white",
+                cursor: "pointer",
+                zIndex: 2,
+                fontSize: "30px",
+              }}
+            />
+          </div>
+        </>
+      ) : (
+        <Skeleton
+          sx={{ bgcolor: "white.900" }}
+          variant="rectangular"
+          animation="wave"
+          width={610}
+          height={318}
+        />
+      )}
     </div>
   );
 };

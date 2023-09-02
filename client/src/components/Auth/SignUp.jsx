@@ -71,7 +71,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="body">
       <NavBar />
 
       <div className="signup-container">
@@ -131,7 +131,7 @@ const SignUp = () => {
         </Form>
         <ToastContainer/>
       </div>
-    </>
+    </div>
   );
 };
 

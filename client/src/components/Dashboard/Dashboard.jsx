@@ -4,9 +4,9 @@ import NavBar from "../NavBar/NavBar";
 import "../styling/home.css";
 import Leftbar from "./Leftbar";
 import Profile from "./Profile";
-import Map from "./Map";
 import { LoginContext } from "../context/context";
 import { useNavigate } from "react-router-dom";
+import Roots from "./Roots";
 
 const Dashboard = () => {
 
@@ -36,8 +36,8 @@ const Dashboard = () => {
             />
             <Route
               exact
-              path="/map"
-              element={<Map />}
+              path="/roots"
+              element={<Roots />}
             />
             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>

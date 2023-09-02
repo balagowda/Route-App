@@ -54,7 +54,7 @@ const { account, setAccount } = useContext(LoginContext);
         position: "top-center",
       });
     } else {
-      redirect("/dashboard/map");
+      redirect("/dashboard/roots");
       toast.success("Login Sucess", {
         position: "top-center",
       });
@@ -68,12 +68,12 @@ const { account, setAccount } = useContext(LoginContext);
 
   useEffect(() => {
     if (account) {
-      redirect("/dashboard/map"); 
+      redirect("/dashboard/roots"); 
     }
   }, [account,redirect]);
 
   return (
-    <>
+    <div className="body">
       <NavBar />
 
       <div className="login-container">
@@ -111,7 +111,7 @@ const { account, setAccount } = useContext(LoginContext);
         </Form>
         <ToastContainer/>
       </div>
-    </>
+    </div>
   );
 };
 
