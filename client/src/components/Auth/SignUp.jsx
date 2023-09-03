@@ -71,7 +71,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="body">
+    <>
       <NavBar />
 
       <div className="signup-container">
@@ -121,7 +121,7 @@ const SignUp = () => {
             />
           </Form.Group>{" "}
           <br />
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="col-sm-5 p-2">
             Sign Up
           </Button>
           <br /><br />
@@ -131,7 +131,7 @@ const SignUp = () => {
         </Form>
         <ToastContainer/>
       </div>
-    </div>
+    </>
   );
 };
 
