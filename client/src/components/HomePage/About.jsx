@@ -68,8 +68,6 @@ const About = () => {
             </li>
           </ul>
         </p>
-        <br />
-        <h5><strong>Thanks for Choosing Us!</strong></h5>
       </div>
       <div className="circle"></div>
     </div>
